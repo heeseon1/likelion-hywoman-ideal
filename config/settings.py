@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'board',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
