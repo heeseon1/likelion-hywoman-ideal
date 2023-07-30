@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Photo App</title>
+    <title>board</title>
 </head>
 
+
 <body>
+{% block content %}
+
+{% if user.is_authenticated %}
+<p>안녕하세요, {{user.username}}님!</p>
+<a href="/accounts/logout">로그아웃</a>
+{% else %}
+
+{% endif %}
+
+
 <h2>묻고 답해요</h2>
 <h3><a href="{% url 'post_register' %}">작성하기</a></h3>
 <section>
@@ -18,5 +29,6 @@
     </div>
     {% endfor %}
 </section>
+{% endblock %}
 </body>
 </html>
