@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo App</title>
+</head>
+
+<body>
+  <div>
+    <section>
+      <h2>글을 작성해주세요</h2>
+      <form method="POST">
+        {% csrf_token %} {{form.as_p}}
+        <button type= "submit">올리기!</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
