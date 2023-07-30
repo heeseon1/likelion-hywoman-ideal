@@ -20,8 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('web.urls')),
-<<<<<<< HEAD
-=======
     path('', include('board.urls')),
->>>>>>> 0d24c6dfa5d305095daf680917918d331957d863
 ]

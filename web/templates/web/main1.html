@@ -15,16 +15,22 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
             integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
-    {% block script %}
-    {% endblock %}
-
     {% block style %}
     {% endblock %}
-
 </head>
 
+
 {% block content %}
+
+{% if user.is_authenticated %}
+{% load static %}
+<script>
+    window.location.href = "{% url 'post_list' %}";
+</script>
+{% else %}
+
 <a href="{% url 'web:login' %}" class="btn btn-outline-info"> 장애인 로그인</a></p>
 <a href="{% url 'web:login' %}" class="btn btn-outline-info"> 봉사자 로그인</a>
+{% endif %}
 
 {% endblock %}

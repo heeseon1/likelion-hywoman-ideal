@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+
 # Create your views here.
 
 def main1(request):
@@ -7,3 +8,5 @@ def main1(request):
 
 def login(request):
     return render(request, 'web/login.html')
+
+
