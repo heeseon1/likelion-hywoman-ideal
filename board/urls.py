@@ -1,8 +1,14 @@
 from django.urls import path
 from . import views
 
+app_name = 'board'
+
 urlpatterns = [
-    path('list/', views.post_list, name='post_list'),
-    path('register/', views.post_register, name='post_register'),
-    path('list/<int:pk>', views.post_detail, name='post_detail'),
+    path('list/', views.post_list.as_view(), name='post_list'),
+    path('register/', views.post_register.as_view(), name='post_register'),
+    path('list/<int:pk>', views.post_detail.as_view(), name='post_detail'),
+    # 코멘트 작성
+    path("<int:pk>/comment/write/", views.CommentWrite.as_view(), name="cm-write"),
+    # 코멘트 삭제
+    path("delete/<int:pk>/comment/delete/", views.CommentDelete.as_view(), name="cm-delete")
 ]
