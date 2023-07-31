@@ -9,4 +9,5 @@ def main1(request):
 def login(request):
     return render(request, 'web/login.html')
 
-
+def button01(request):
+    return render(request, 'web/button01.html')
