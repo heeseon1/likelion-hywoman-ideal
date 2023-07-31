@@ -15,7 +15,6 @@ from .forms import PostForm, CommentForm
 #         post = get_object_or_404(Post, pk=pk)
 #         post.delete()
 #         return redirect('blog:list')
-# 게시글 등록하기
 
 
 # def post_register(request):
@@ -29,6 +28,7 @@ from .forms import PostForm, CommentForm
 #         form = PostForm()
 #     return render(request, 'board/post_register.html', {'form': form})
 
+# 게시글 등록하기
 class post_register(LoginRequiredMixin, View):
     def get(self, request):
         form = PostForm()

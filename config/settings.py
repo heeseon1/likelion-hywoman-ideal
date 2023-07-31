@@ -128,6 +128,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# 배포할 때 STATIC FILE들을 어디에 집합시킬 것인지
+# https://0ver-grow.tistory.com/912
+# python manage.py collectstatic 실행
+STATIC_ROOT = os.path.join('staticfiles')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

@@ -1,23 +1,33 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>board</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+    <link href="{% static 'css/post_list.css' %}" rel="stylesheet">
 </head>
 
 
-<body>
+<body style="background-color: black;">
 {% block content %}
 
 {% if user.is_authenticated %}
 <p>안녕하세요, {{user.username}}님!</p>
+<!--나중에 로그아웃을 돌아가기 버튼으로 변경하면 될 듯합니다!-->
 <a href="/accounts/logout">로그아웃</a>
 {% else %}
 
 {% endif %}
-
-
-<h2>묻고 답해요</h2>
+    <div class="layout">
+        <div class="container">
+            <div class="titleText">
+                <span id="str1">묻고<br>답해요</span>
+            </div>
+        </div>
+    </div>
 <h3><a href="{% url 'board:post_register' %}">작성하기</a></h3>
 <section>
     {% for post in posts %}
@@ -25,10 +35,13 @@
         <h2>
             <a href="{% url 'board:post_detail' pk=post.pk %}" class="photo">{{post.title}}</a>
         </h2>
-        <p>{{post.author}}</p>
+        <p style="color: #999999;">{{post.author}}</p>
     </div>
     {% endfor %}
 </section>
 {% endblock %}
 </body>
 </html>
+
+
+
