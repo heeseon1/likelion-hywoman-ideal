@@ -18,12 +18,12 @@
 
 
 <h2>묻고 답해요</h2>
-<h3><a href="{% url 'post_register' %}">작성하기</a></h3>
+<h3><a href="{% url 'board:post_register' %}">작성하기</a></h3>
 <section>
     {% for post in posts %}
     <div>
         <h2>
-            <a href="{% url 'post_detail' pk=post.pk %}" class="photo">{{post.title}}</a>
+            <a href="{% url 'board:post_detail' pk=post.pk %}" class="photo">{{post.title}}</a>
         </h2>
         <p>{{post.author}}</p>
     </div>
