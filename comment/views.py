@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Board, Comment
 from .forms import CommentForm
 
 def board_detail(request, board_id):
