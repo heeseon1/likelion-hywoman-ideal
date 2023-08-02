@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
-    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google'
 
 ]
 
@@ -144,3 +144,5 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL ='/'
+
+AUTH_USER_MODEL = "web.User"
