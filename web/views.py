@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import User
 
 
 # Create your views here.
@@ -11,3 +12,4 @@ def login(request):
 
 def button01(request):
     return render(request, 'web/button01.html')
+
