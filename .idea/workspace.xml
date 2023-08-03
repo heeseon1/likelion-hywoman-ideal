@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7004c3a7-1aec-464b-9fd8-c2ebf7877c61" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/board/templates/board/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/board/templates/board/post_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/board/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/board/views.py" afterDir="false" />
+    <list default="true" id="fcc62af3-a32a-4544-bdc3-712165ef81f3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/board/templates/board/post_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/board/templates/board/post_delete.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,38 +15,30 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="2THOL1teR0z2CaGNGFtn5iYNbxm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2TSvd1Hz9gM3CMFRYPXW8ZXHbeR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/python"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7004c3a7-1aec-464b-9fd8-c2ebf7877c61" name="Changes" comment="" />
-      <created>1690696483272</created>
+      <changelist id="fcc62af3-a32a-4544-bdc3-712165ef81f3" name="Changes" comment="" />
+      <created>1691049379759</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1690696483272</updated>
+      <updated>1691049379759</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
