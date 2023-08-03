@@ -1,32 +1,16 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.views.generic import View, UpdateView, DeleteView
+from django.urls import reverse_lazy  # reverse_lazy를 import
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.http import HttpResponse
-from django.views.generic import View, UpdateView
+
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-###Post
-
-
-# class Delete(View):
-#     def post(self, request, pk):
-#         post = get_object_or_404(Post, pk=pk)
-#         post.delete()
-#         return redirect('blog:list')
-
-
-# def post_register(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = PostForm()
-#     return render(request, 'board/post_register.html', {'form': form})
 
 # 게시글 등록하기
 class post_register(LoginRequiredMixin, View):
@@ -92,6 +76,24 @@ class post_detail(View):
         }
         return render(request, 'board/post_detail.html', context)
 
+class post_update(LoginRequiredMixin, UpdateView):
+    model = Post  # 수정할 게시글의 모델을 명시적으로 지정
+    form_class = PostForm
+    template_name = "board/post_register.html"  # post_register.html을 재활용
+    context_object_name = "form"
+    def get_success_url(self):
+        return reverse_lazy("board:post_detail", kwargs={"pk": self.object.pk})
+
+#게시글 삭제하기
+class post_delete(LoginRequiredMixin, DeleteView):
+    model = Post
+    pk_url_kwarg = 'post_id'
+    template_name = 'board/post_delete.html'
+    def get_object(self):
+        object = get_object_or_404(Post, id=self.kwargs['pk'])
+        return object
+    def get_success_url(self):
+        return reverse_lazy("board:post_list")
 
 
 ###Comment
@@ -125,13 +127,6 @@ class CommentDelete(View):
     def post(self, request, pk):
         if request.user.is_authenticated:
             comment = get_object_or_404(Comment, pk=pk)
-            post_id = comment.post.id
-            if comment.author == request.user:
-                comment.delete()
-                return redirect(comment.post.get_absolute_url())
-            else:
-                return HttpResponse('You are not allowed to delete this comment')
-        return redirect('board/post_detail.html')
-
-
-
+            comment.delete()
+            return redirect('board:post_detail', pk=comment.post.id)
+        return redirect('board:post_detail', pk=pk)
