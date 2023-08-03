@@ -49,6 +49,11 @@
                 <li>
                     {{ comment.content}} / {{ comment.author}}
                     {% if user.is_authenticated and comment.author == user.username %}
+                    <!-- "댓글 수정하기" 링크 추가 -->
+                    </p>
+                    <a href="{% url 'board:cm-update' pk=comment.pk %}">
+                        <input type="submit" value="수정" class="btn">
+                    </a>
                     <form action="{% url 'board:cm-delete' pk=comment.pk %}" method="post">
                         {% csrf_token %}
                         <input type="submit" value="삭제" class="btn">

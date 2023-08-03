@@ -12,5 +12,6 @@ urlpatterns = [
     # 코멘트 작성
     path("<int:pk>/comment/write/", views.CommentWrite.as_view(), name="cm-write"),
     # 코멘트 삭제
-    path("delete/<int:pk>/comment/delete/", views.CommentDelete.as_view(), name="cm-delete")
+    path("delete/<int:pk>/comment/delete/", views.CommentDelete.as_view(), name="cm-delete"),
+    path("comment/update/<int:pk>/", views.CommentUpdate.as_view(), name="cm-update"),
 ]

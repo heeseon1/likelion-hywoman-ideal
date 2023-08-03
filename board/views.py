@@ -1,12 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic import View, UpdateView, DeleteView
 from django.urls import reverse_lazy  # reverse_lazy를 import
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.contrib.auth.decorators import login_required
-
-from web.models import User
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
@@ -140,6 +136,20 @@ class CommentWrite(LoginRequiredMixin, View):
         }
         return render(request, 'board/post_detail.html', context)
 
+##댓글 수정하기
+class CommentUpdate(View):
+    def get(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        form = CommentForm(instance=comment)
+        return render(request, 'board/comment_update.html', {'form': form, 'comment': comment})
+
+    def post(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('board:post_detail', pk=comment.post.pk)  # 이동할 URL 지정
+        return render(request, 'board/comment_update.html', {'form': form, 'comment': comment})
 
 class CommentDelete(View):
     def post(self, request, pk):
