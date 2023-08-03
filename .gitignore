@@ -1,3 +1,7 @@
 hackathon_venv
 myvenv
+<<<<<<< HEAD
 db.sqlite3
+=======
+venv
+>>>>>>> 799c732a80e00f2538bbb177a49a0ade08fd21ca
