@@ -7,11 +7,11 @@ from django.dispatch import receiver
 
 class User(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
-
+    # False가 봉사자/ True가 장애인
+    category = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
-
 
 
 @receiver(social_account_added) #소셜로그인 계정 추가시 실행

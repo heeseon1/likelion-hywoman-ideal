@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Page</title>
+</head>
+<body>
+    <h1>Review Page</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label><input type="radio" name="rating" value="1"> Option 1</label><br>
+        <label><input type="radio" name="rating" value="2"> Option 2</label><br>
+        <label><input type="radio" name="rating" value="3"> Option 3</label><br>
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>
