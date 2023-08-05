@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90464f28-95a3-4204-995c-ed5030116483" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/migrations/0005_comment_title.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/migrations/0006_alter_comment_title.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/board/templates/board/form.error.html" beforeDir="false" afterPath="$PROJECT_DIR$/board/templates/board/form_error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/board/templates/board/post_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/board/templates/board/post_delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/board/templates/board/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/board/templates/board/post_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/board/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/board/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/templates/web/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/web/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/templates/web/main1.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/web/main1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

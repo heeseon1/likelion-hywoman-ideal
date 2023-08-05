@@ -14,7 +14,9 @@ class User(AbstractUser):
         return self.username
 
 
-@receiver(social_account_added) #소셜로그인 계정 추가시 실행
+
+@receiver(social_account_added)  # 소셜로그인 계정 추가시 실행
+
 def social_username(sender, request, sociallogin, **kwargs):
     user = sociallogin.user
     if not user.username and sociallogin.account.provider in ['google', 'kakao', 'naver']:

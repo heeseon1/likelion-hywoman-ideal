@@ -15,7 +15,9 @@
                         <h5 class="card-title">{{ post_title }}</h5>
 
                         {% if user.is_authenticated and user.username == post_author %}
+
                         <!-- "글 수정하기" 링크 추가 -->
+
                         <h3><a href="{% url 'board:post_update' pk=post_id %}">글 수정하기</a></h3>
                         <h3><a href="{% url 'board:post_delete' pk=post_id %}">글 삭제하기</a></h3>
                         {% endif %}
@@ -68,3 +70,4 @@
 {% endblock %}
 </body>
 </html>
+
