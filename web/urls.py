@@ -4,7 +4,10 @@ from .views import *
 app_name = 'web'
 
 urlpatterns = [
-    path('', main1, name='main1'),
-    path('login/', login, name='login'),
-    path('button01/', button01, name='button01'),
+    path('', login, name='login'),
+    path('main1/', main1, name='main1'),
+    # 봉사자
+    path('button01/<int:pk>/', button01, name='button01'),
+    # 장애인
+    path('button01_true/<int:pk>/', button01_true, name='button01_true'),
 ]

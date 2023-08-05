@@ -15,3 +15,4 @@ urlpatterns = [
     path("delete/<int:pk>/comment/delete/", views.CommentDelete.as_view(), name="cm-delete"),
     path("comment/update/<int:pk>/", views.CommentUpdate.as_view(), name="cm-update"),
 ]
+

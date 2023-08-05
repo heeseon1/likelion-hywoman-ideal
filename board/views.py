@@ -1,32 +1,20 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, UpdateView, DeleteView
 from django.urls import reverse_lazy  # reverse_lazy를 import
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.views.generic import View, UpdateView, DeleteView
+from django.urls import reverse_lazy  # reverse_lazy를 import
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 ###Post
-
-
-# class Delete(View):
-#     def post(self, request, pk):
-#         post = get_object_or_404(Post, pk=pk)
-#         post.delete()
-#         return redirect('blog:list')
-
-
-# def post_register(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = PostForm()
-#     return render(request, 'board/post_register.html', {'form': form})
 
 # 게시글 등록하기
 class post_register(LoginRequiredMixin, View):
@@ -64,16 +52,8 @@ class post_list(View):
         }
         return render(request, "board/post_list.html", context)
 
-# def post_list(request):
-#     posts = Post.objects.all()
-#     return render(request, 'board/post_list.html', {'posts': posts})
 
 # 게시글 상세보기
-# def post_detail(request, pk):
-#     post = Post.objects.get(id=pk)
-#     return render(request, 'board/post_detail.html', {'post': post})
-
-
 class post_detail(View):
     def get(self, request, pk):
         post = Post.objects.prefetch_related('comment_set').get(pk=pk)
@@ -91,6 +71,8 @@ class post_detail(View):
         }
         return render(request, 'board/post_detail.html', context)
 
+
+# 게시글 수정하기
 class post_update(LoginRequiredMixin, UpdateView):
     model = Post  # 수정할 게시글의 모델을 명시적으로 지정
     form_class = PostForm
@@ -98,6 +80,7 @@ class post_update(LoginRequiredMixin, UpdateView):
     context_object_name = "form"
     def get_success_url(self):
         return reverse_lazy("board:post_detail", kwargs={"pk": self.object.pk})
+
 
 #게시글 삭제하기
 class post_delete(LoginRequiredMixin, DeleteView):
@@ -109,6 +92,8 @@ class post_delete(LoginRequiredMixin, DeleteView):
         return object
     def get_success_url(self):
         return reverse_lazy("board:post_list")
+
+
 
 ###Comment
 class CommentWrite(LoginRequiredMixin, View):
