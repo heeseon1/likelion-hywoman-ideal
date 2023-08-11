@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
-    'allauth.socialaccount.providers.google'
-
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -113,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
 
@@ -144,6 +143,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL ='/main1/'
+# 회원가입 후 이동할 창
+ACCOUNT_SIGNUP_REDIRECT_URL = '/main1/'
 
 AUTH_USER_MODEL = "web.User"

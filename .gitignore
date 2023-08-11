@@ -2,6 +2,4 @@ hackathon_venv
 myvenv
 db.sqlite3
 venv
-venv
-db.sqlite3
-.idea
+.idea/
