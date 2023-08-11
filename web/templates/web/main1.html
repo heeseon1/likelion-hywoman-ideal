@@ -12,8 +12,8 @@
 <body>
 {% block content %}
 {% if user.is_authenticated %}
-    <a href="{% url 'web:button01' pk=user.pk %}" class="btn btn-outline-info"> 돕고 싶어요</a>
-    <a href="{% url 'web:button01_true' pk=user.pk %}" class="btn btn-outline-info"> 도움이 필요해요</a>
+    <a href="{% url 'web:button01' %}" class="btn btn-outline-info"> 돕고 싶어요</a>
+    <a href="{% url 'web:button01_true' %}" class="btn btn-outline-info"> 도움이 필요해요</a>
 {% endif %}
 {% endblock %}
 </body>
