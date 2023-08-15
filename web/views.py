@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 from .models import User
 
@@ -9,19 +9,23 @@ def login(request):
         if request.user.category == True:
             return redirect('web:button01_true')
         else:
-            return redirect('web:button01')
+            return redirect('web:button02')
     else:
         return render(request, 'web/login.html')
 
+@login_required
 def main1(request):
-    return render(request, 'web/main1.html')
+    if request.user.category == True:
+        return redirect('web:button01_true')
+    else:
+        return render(request, 'web/main1.html')
 
 # 봉사자 값 부여
-def button01(request):
+def button02(request):
     user = request.user
     user.category = False
     user.save()
-    return render(request, 'web/button01.html')
+    return render(request, 'web/button02.html')
 
 # 장애인 값 부여
 def button01_true(request):
@@ -29,4 +33,3 @@ def button01_true(request):
     user.category = True
     user.save()
     return render(request, 'web/button01.html')
-

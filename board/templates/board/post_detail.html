@@ -1,73 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+{% block content %}
+
+
 <head>
     <meta charset="UTF-8">
-    <title>Post Detail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물</title>
+    {% load static %}
+    <link href="{% static 'css/posted.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d9483ff595.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .out-top {
+            animation: rotate 20s linear infinite;
+            transform-origin: 13px 25px;
+        }
+
+        .in-top {
+            animation: rotate 10s linear infinite;
+            transform-origin: 13px 25px;
+        }
+
+        .out-bottom {
+            animation: rotate 25s linear infinite;
+            transform-origin: 84px 93px;
+        }
+
+        .in-bottom {
+            animation: rotate 15s linear infinite;
+            transform-origin: 84px 93px;
+        }
+    </style>
 </head>
-<body>
-{% block content %}
-    <div class="container">
-        <h1>묻고 답해요</h1>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post_title }}</h5>
 
-                        {% if user.is_authenticated and user.username == post_author %}
 
-                        <!-- "글 수정하기" 링크 추가 -->
+<body style="background-color:  rgb(244, 247, 208);">
+    <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
 
-                        <h3><a href="{% url 'board:post_update' pk=post_id %}">글 수정하기</a></h3>
-                        <h3><a href="{% url 'board:post_delete' pk=post_id %}">글 삭제하기</a></h3>
-                        {% endif %}
-                        <p class="card-text">{{ post_author }}</p>
-                        <p class="card-text">{{ post_contents }}</p>
+        <path fill="#D8D8D8" class="out-top"
+            d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
+        <path fill="#A4A4A4" class="in-top"
+            d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+        <path fill="#F2F2F2" class="out-bottom"
+            d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
+        <path fill="#E6E6E6" class="in-bottom"
+            d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+    </svg>
 
-                        <a href="{% url 'board:post_list' %}" class="btn btn-primary">돌아가기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<nav class="nav-1">
+        <span class="logoImage"><a href="#"><img src="{% static 'img/logo-notStr.png' %}" alt="logoImage"></a></span>
+        <span class="web-name">EYE CONTACT</span>
+    </nav>
+    <div class="toggle">
+        <i class="fa fa-bars menu" aria-hidden="true"></i>
     </div>
-    <hr>
-    <h3>Comment</h3>
-    <form action="{% url 'board:cm-write' pk=post_id %}" method="post">
-        {% csrf_token %}
-        {% if comment_form.errors %}
-            {% with form=comment_form %}
-                {% include 'board/form_error.html' %}
-            {% endwith %}
-        {% else %}
-            {{ comment_form.content }}
-        {% endif %}
-        <input type="submit" value="댓글달기">
-    </form>
-    <br>
-
-    {% if comments %}
+    <span class="toggle-list">
         <ul>
-            {% for comment in comments %}
-                <li>
-                    {{ comment.content}} / {{ comment.author}}
-                    {% if user.is_authenticated and comment.author == user.username %}
-                    <!-- "댓글 수정하기" 링크 추가 -->
-                    </p>
-                    <a href="{% url 'board:cm-update' pk=comment.pk %}">
-                        <input type="submit" value="수정" class="btn">
-                    </a>
-                    <form action="{% url 'board:cm-delete' pk=comment.pk %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="삭제" class="btn">
-                    </form>
-                    {% endif %}
-                </li>
-            {% endfor %}
+            <li><a href="#">홈</a></li>
+            <li><a href="{% url 'board:matching' %}">매칭</a></li>
+            <!-- 커뮤 링크는 #로 해두셔도 됩니더 -->
+            <li><a href="{% url 'board:community' %}">커뮤니티</a></li>
+            <li><a href="#">마이페이지</a></li>
         </ul>
-    {% else %}
-        <p>댓글이 없습니다.</p>
-    {% endif %}
+    </span>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('.menu').click(function(){
+          $('ul').toggleClass('active');
+      })
+  })
+</script>
+    <div class="layout">
+        <div class="container">
+            <!-- <div class="titleText">
+                <span id="str1">묻고<br>답해요</span>
+                <span id="soundIcon"><i class="fa-solid fa-volume-high" id="playButton"
+                        alt="음성 재생 버튼" style="cursor: pointer;"></i></span>
+                <audio id="audioPlayer">
+                    <source src="#" type="audio/mpeg">
+                </audio>
+            </div> -->
+        </div>
+        <div class="phone">
+
+            <div class="menu">
+                <div class="time">4:20</div>
+                <div class="icons">
+                    <div class="network"></div>
+                    <div class="battery"></div>
+
+                </div>
+
+            </div>
+
+            <!-- 추가 부분 시작 (삭제, 수정, 신고 버튼)-->
+            <div class="phone-header">
+                <span class="user">{{ post_author }}</span>
+                {% if user.is_authenticated and user.username == post_author %}
+                <span class="rewrite" title="수정하기">
+                    <a href="{% url 'board:post_update' pk=post_id %}">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </span>
+                <span class="remove-post" title="삭제하기">
+                    <a href="{% url 'board:post_delete' pk=post_id %}">
+                    <i class="fa-solid fa-trash"></i>
+                    </a>
+                </span>
+                {% endif %}
+                <span class="report" title="신고하기">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+
+               <!-- 음성 지원하려고 해본 겁니다 무시해 주세용... -->
+                <!-- <audio class="audio-player">
+                    <source src="/mp3/신고하기.mp3" type="audio/mpeg">
+                    지원되지 않는 브라우저입니다
+                </audio> -->
+
+            </div>
+<!-- 추가 부분 끝 -->
+
+
+            <div class="scroll-container-1">
+                    <span class="content">
+                        <p>{{ post_contents }}
+                            <!-- css 값을 초과하면 스크롤이 생깁니다 테스트를 위해 주절주절
+                            길게 적어보고 있어요 해커톤 파이팅 아이디얼 파이팅
+                            우리 팀 파이팅 행복하세요 잘 되는 거 같네요
+                            확인하시려면 이 주석을 풀면 됩니다-->
+                        </p>
+                    </span>
+            </div>
+
+
+            <div class="line-1"></div>
+            <!-- 댓글 시작 -->
+
+                <div class="comment">
+                    {% for comment in comments %}
+                    <!-- 댓글 추가 시 여기서부터 -->
+                    <div class="user-name">{{ comment.author}}</div>
+                    <div class="user-comment">{{ comment.content}}</div>
+                    <div class="line-2"></div>
+                    <!-- 여기까지를 반복하면 됩니다
+                    .comment 안에서 움직이면 됩니당 -->
+                    {% endfor %}
+                </div>
+
+                <!-- 댓글 끝 -->
+
+            <form action="{% url 'board:cm-write' pk=post_id %}" method="post">
+                {% csrf_token %}
+                {{ comment_form.label_tag }}
+                <span><textarea name="{{ comment_form.content.name }}" id="input-comment" placeholder="댓글을 작성해 주세요"></textarea></span>
+                <!--요게 댓글 등록 버튼-->
+                <span><input id="send" type="submit" value="작성"></span>
+            </form>
+
+
+
+
+        </div>
+
+        <footer></footer>
+
+    </div>
 {% endblock %}
 </body>
-</html>
 
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>가능한 날짜와 시간대 입력</title>
+</head>
+<body>
+  <h1>가능한 날짜와 시간대 입력</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ formset.management_form }}
+    {% for form in formset.forms %}
+      {{ form.as_table }}
+    {% endfor %}
+    <button type="submit">저장</button>
+  </form>
+</body>
+</html>

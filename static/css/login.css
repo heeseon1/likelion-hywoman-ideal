@@ -1,0 +1,357 @@
+#layout {
+  width: 960px;
+  padding: 0 20px;
+  margin: 0 auto;
+  /* position: fixed;
+      overflow: hidden; */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* 로그인 버튼 css */
+.login-btn {
+  display: block;
+  margin-top: 5%;
+  margin-left: 160px;
+}
+
+.login-btn img {
+  width: 300px;
+
+}
+
+.login-btn button {
+  border: none;
+  background: none;
+}
+
+.google-login img {
+  width: 305px;
+  margin-bottom: 30px;
+}
+
+.naver-login button:hover{
+}
+
+.kakao-login img, .naver-login img {
+  box-shadow: 0 2px 4px 0 rgb(124, 123, 123);
+}
+
+.naver-login {
+  margin-bottom: 30px;
+}
+
+.back {
+  background-color: rgb(161, 161, 161);
+  width: 600px;
+  z-index: 2;
+  align-items: center;
+  border-radius: 32% 68% 28% 72% / 64% 47% 53% 36%;
+  height: 400px;
+  margin-left: 34%;
+}
+
+.title {
+  margin-left: 30%;
+  font-size: 60px;
+  font-weight: 500;
+  margin-top: 50px;
+}
+
+.str4 {
+  font-size: 20px;
+  font-family: 'Gaegu', cursive;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#soundIcon{
+  margin-left: 30px;
+}
+
+.fa-volume-high{
+  color: #000;
+  font-size: 60px;
+}
+
+/* 토글 */
+nav {
+  width: 100%;
+
+}
+
+ul {
+  width: 60%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 30px;
+}
+
+
+
+
+ul li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.toggle {
+  width: 100%;
+  padding: 20px 30px;
+  text-align: right;
+  box-sizing: border-box;
+  color: white;
+  font-size: 32px;
+  display: none;
+
+}
+
+.toggle i {
+  color: #6a8bdf;
+}
+
+.web-name {
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Gaegu', cursive;
+  font-family: 'Noto Sans KR', sans-serif;
+
+}
+
+nav span:first-child {
+  margin-left: 5%;
+}
+
+nav span {
+  float: left;
+}
+
+
+nav span img {
+  width: 100px;
+  padding: 10px;
+}
+
+
+
+
+/* 리스트 글이 길어져서 963px부터 블록으로 떨어지는 게 지저분한 거 같아서 964px로 변경했습니다!  */
+@media (min-width:220px) and (max-width:990px) {
+  .toggle {
+    display: block;
+    height: 100px;
+  }
+
+  ul {
+    width: 100%;
+    display: none;
+  }
+
+  ul li {
+    display: block;
+    text-align: center;
+  }
+
+  .active {
+    display: block;
+  }
+}
+
+
+svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -3;
+}
+
+@media screen and (max-width:1020px){
+  #layout {
+    width: 1020px;
+    padding: 0 20px;
+    margin: 0 auto;
+    /* position: fixed;
+        overflow: hidden; */
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+
+  /* 로그인 버튼 css */
+  .login-btn {
+    display: block;
+    margin-top: 5%;
+    margin-left: 160px;
+  }
+
+  .login-btn img {
+    width: 300px;
+
+  }
+
+  .login-btn button {
+    border: none;
+    background: none;
+  }
+
+  .google-login img {
+    width: 305px;
+    margin-bottom: 30px;
+  }
+
+
+
+  .kakao-login img, .naver-login img {
+    box-shadow: 0 2px 4px 0 rgb(124, 123, 123);
+  }
+
+  .naver-login {
+    margin-bottom: 30px;
+  }
+
+  .back {
+    background-color: rgb(161, 161, 161);
+    width: 600px;
+    z-index: 2;
+    align-items: center;
+    border-radius: 32% 68% 28% 72% / 64% 47% 53% 36%;
+    height: 400px;
+    margin-left: 19%;
+  }
+
+  .title {
+    margin-left: 15%;
+    font-size: 60px;
+    font-weight: 500;
+    margin-top: 50px;
+  }
+
+  .str4 {
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  #soundIcon{
+    margin-left: 30px;
+  }
+
+  .fa-volume-high{
+    color: #000;
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width:478px){
+  #layout {
+    width: 460px;
+    padding: 0 10px;
+    margin: 0 auto;
+    /* position: fixed;
+        overflow: hidden; */
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+ footer{
+  height: 100px;
+ }
+
+  /* 로그인 버튼 css */
+  .login-btn {
+    display: block;
+    margin-top: 5%;
+    margin-left: 30px;
+  }
+
+  .login-btn img {
+    width: 200px;
+
+  }
+
+  .login-btn button {
+    border: none;
+    background: none;
+  }
+
+  .google-login img {
+    width: 205px;
+    margin-bottom: 30px;
+  }
+
+
+
+  .kakao-login img, .naver-login img {
+    box-shadow: 0 2px 4px 0 rgb(124, 123, 123);
+  }
+
+  .naver-login {
+    margin-bottom: 30px;
+  }
+
+  .back {
+    background-color: rgb(161, 161, 161);
+    width: 300px;
+    z-index: 2;
+    align-items: center;
+    border-radius: 32% 68% 28% 72% / 64% 47% 53% 36%;
+    height: 300px;
+    margin-left: 20%;
+  }
+
+  .title {
+    margin-left: 14%;
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 50px;
+  }
+
+  .str4 {
+    font-size: 20px;
+    font-family: 'Gaegu', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  #soundIcon{
+    margin-left: 10px;
+  }
+
+  .fa-volume-high{
+    color: #000;
+    font-size: 50px;
+  }
+}

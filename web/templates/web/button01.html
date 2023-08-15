@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 
 {% load static %}
 
-
 <html lang="en">
-{% if user.is_authenticated %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +27,7 @@
                 <span id="str3">하시겠습니까?</span>
             </div>
 
-            <button class="bth-1"><a href="{% url 'board:post_list' %}">
+            <button class="bth-1"><a href="{% url 'board:community' %}">
                 <span id="str4">커뮤니티</span>
                 <span id="str5">로</span>
                 <br>
@@ -40,7 +37,7 @@
 
             <br>
 
-            <button class="bth-2"><a href="#">
+            <button class="bth-2"><a href="{% url 'board:matching' %}">
                 <span id="str7">매칭(1:1)</span>
                 <span id="str8">으로</span>
                 <br>
@@ -51,6 +48,6 @@
         </div>
     </div>
 
-{% endif %}
+
 </body>
 </html>

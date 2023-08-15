@@ -1,18 +1,16 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, UpdateView, DeleteView
-from django.urls import reverse_lazy  # reverse_lazy를 import
+from django.urls import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
-from django.views.generic import View, UpdateView, DeleteView
-from django.urls import reverse_lazy  # reverse_lazy를 import
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from .models import Post, Comment, Message, alarm_push
+from .forms import PostForm, CommentForm, MessageForm
+from django.views import View
+from django.contrib.auth.models import User
+from .models import VolunteerProfile
+from .forms import VolunteerProfileForm
 
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
 
-from django.contrib.auth.mixins import UserPassesTestMixin
 
 ###Post
 
@@ -33,24 +31,24 @@ class post_register(LoginRequiredMixin, View):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect("board:post_list")
+            return redirect("board:community")
 
         context = {
             'form': form
         }
 
-        return render(request, "board/post_register.htm", context)
+        return render(request, "board/post_register.html", context)
 
 
 # 게시글 전체 보기
-class post_list(View):
+class community(View):
     def get(self, request):
         posts = Post.objects.all()
         context = {
             "posts": posts,
             "title": "Board"
         }
-        return render(request, "board/post_list.html", context)
+        return render(request, "board/community.html", context)
 
 
 # 게시글 상세보기
@@ -82,6 +80,7 @@ class post_update(LoginRequiredMixin, UpdateView):
         return reverse_lazy("board:post_detail", kwargs={"pk": self.object.pk})
 
 
+
 #게시글 삭제하기
 class post_delete(LoginRequiredMixin, DeleteView):
     model = Post
@@ -91,7 +90,7 @@ class post_delete(LoginRequiredMixin, DeleteView):
         object = get_object_or_404(Post, id=self.kwargs['pk'])
         return object
     def get_success_url(self):
-        return reverse_lazy("board:post_list")
+        return reverse_lazy("board:community")
 
 
 
@@ -100,13 +99,27 @@ class CommentWrite(LoginRequiredMixin, View):
     def post(self, request, pk):
         form = CommentForm(request.POST)
         post = get_object_or_404(Post, pk=pk)
+        author = request.user
 
         if form.is_valid():
             content = form.cleaned_data['content']
-            author = request.user
+
+            if isinstance(request.user, User):
+                author = request.user
 
             try:
                 comment = Comment.objects.create(post=post, content=content, author=author)
+
+                if author.category == False:
+                    #if isinstance(post.author, User):
+                    sender_username = author
+                    alarm = alarm_push.objects.create(
+                        user=post.author,
+                        sender=sender_username,
+                        post=post,
+                        content=f'{sender_username}님의 댓글: {comment.content}'
+                    )
+
             except ObjectDoesNotExist as e:
                 print('게시물이 존재하지 않습니다.', str(e))
             except ValidationError as e:
@@ -120,6 +133,11 @@ class CommentWrite(LoginRequiredMixin, View):
             'comment_form': form
         }
         return render(request, 'board/post_detail.html', context)
+
+#알림 보여주기
+def alarm_list(request):
+    alarms = alarm_push.objects.all()
+    return render(request, 'board/alarm.html', {'alarms': alarms})
 
 ##댓글 수정하기
 class CommentUpdate(View):
@@ -143,3 +161,89 @@ class CommentDelete(View):
             comment.delete()
             return redirect('board:post_detail', pk=comment.post.id)
         return redirect('board:post_detail', pk=pk)
+
+
+##매칭 화면
+def matching_view(request):
+    return render(request, 'board/matching.html')
+
+def matching_view2(request):
+    return render(request, 'board/matching2.html')
+
+#봉사자 프로필 등록
+def register_volunteer_profile(request):
+    if request.method == 'POST':
+        form = VolunteerProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('volunteer_list')
+    else:
+        form = VolunteerProfileForm()
+
+    context = {'form': form}
+    return render(request, 'board/register_volunteer.html', context)
+
+# 봉사자 프로필 보기
+def volunteer_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(VolunteerProfile, user=user)
+    return render(request, 'board/volunteer_profile.html', {'profile': profile})
+
+#봉사자 목록 보기
+def volunteer_list(request):
+    profiles = VolunteerProfile.objects.all()
+    return render(request, 'board/volunteer_list.html', {'profiles': profiles})
+
+#봉사자 리뷰보기
+class VolunteerReviews(View):
+    def volunteer_reviews(request, volunteer_id):
+        volunteer = get_object_or_404(VolunteerProfile, id=volunteer_id)
+        reviews = Review.objects.filter(volunteer=volunteer.user)
+
+        context = {
+            'volunteer': volunteer,
+            'reviews': reviews,
+        }
+        return render(request, 'board/volunteer_reviews.html', context)
+
+
+#메시지#
+# class SendMessageView(LoginRequiredMixin, View):
+#     template_name = 'board/send_message.html'
+#
+#     def get(self, request, recipient_id):
+#         recipient = get_object_or_404(User, id=recipient_id)
+#         form = MessageForm()
+#         context = {
+#             'recipient': recipient,
+#             'form': form,
+#         }
+#         return render(request, self.template_name, context)
+#
+#     def post(self, request, recipient_id):
+#         recipient = get_object_or_404(User, id=recipient_id)
+#         form = MessageForm(request.POST)
+#         if form.is_valid():
+#             message = form.save(commit=False)
+#             message.sender = request.user
+#             message.recipient = recipient
+#             message.save()
+#             messages.success(request, 'Message sent successfully!')
+#             return redirect('messages:inbox')
+#         context = {
+#             'recipient': recipient,
+#             'form': form,
+#         }
+#         return render(request, self.template_name, context)
+#
+# class InboxView(LoginRequiredMixin, View):
+#     template_name = 'board/inbox.html'
+#
+#     def get(self, request):
+#         received_messages = Message.objects.filter(recipient=request.user)
+#         context = {
+#             'received_messages': received_messages,
+#         }
+#         return render(request, self.template_name, context)

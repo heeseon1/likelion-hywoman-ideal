@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'alarm',
     'web',
     'board',
     'django.contrib.sites',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
     'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -144,6 +146,10 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 # 회원가입 후 이동할 창
-ACCOUNT_SIGNUP_REDIRECT_URL = '/main1/'
+LOGIN_REDIRECT_URL = '/main1/'
+
+#로그아웃 후 이동할 창
+LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = "web.User"
+

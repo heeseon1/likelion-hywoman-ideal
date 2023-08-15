@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>봉사자 리뷰</title>
+</head>
+<body>
+  <h1>{{ volunteer.user.username }}의 리뷰</h1>
+
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <p>평가: {{ review.rating }}</p>
+        <p>{{ review.content }}</p>
+      </li>
+    {% empty %}
+      <li>아직 리뷰가 없습니다.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
