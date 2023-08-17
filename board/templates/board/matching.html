@@ -69,11 +69,11 @@
     </div>
     <span class="toggle-list">
         <ul>
-            <li><a href="#">홈</a></li>
-            <li><a href="#">매칭</a></li>
-            <!-- 커뮤 링크는 #로 해두셔도 됩니더 -->
+            <li><a href="{% url 'web:main1' %}">홈</a></li>
+            <li><a href="{% url 'board:matching' %}">매칭</a></li>
             <li><a href="{% url 'board:community' %}">커뮤니티</a></li>
             <li><a href="#">마이페이지</a></li>
+            <li><a href="{% url 'account_logout' %}">로그아웃</a></li>
         </ul>
     </span>
     <script type="text/javascript">
@@ -108,7 +108,13 @@
             });
         </script>
 
-        <span class="name3"><button class="view-modal"><p class="str3">매칭 신청하기</p></button></span>
+        <span class="name3">
+            <a href="{% url 'board:matching2' %}">
+            <button class="view-modal">
+                <p class="str3">매칭 신청하기</p>
+            </button>
+                 </a>
+        </span>
     </div>
 {% endblock %}
 </body>

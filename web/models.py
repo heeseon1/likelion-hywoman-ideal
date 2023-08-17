@@ -10,7 +10,9 @@ class User(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
     # False가 봉사자/ True가 장애인
     category = models.BooleanField(default=False)
+    warning = models.PositiveSmallIntegerField(default=0)
     objects = UserManager()
+
 
     def __str__(self):
         return self.username

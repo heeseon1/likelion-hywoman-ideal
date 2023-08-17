@@ -74,11 +74,11 @@
     </div>
     <span class="toggle-list">
         <ul>
-            <li><a href="#">홈</a></li>
-            <li><a href="#">매칭</a></li>
-            <!-- 커뮤 링크는 #로 해두셔도 됩니더 -->
+            <li><a href="{% url 'web:main1' %}">홈</a></li>
+            <li><a href="{% url 'board:matching' %}">매칭</a></li>
             <li><a href="{% url 'board:community' %}">커뮤니티</a></li>
             <li><a href="#">마이페이지</a></li>
+            <li><a href="{% url 'account_logout' %}">로그아웃</a></li>
         </ul>
     </span>
     <script type="text/javascript">
@@ -115,22 +115,25 @@
             });
         </script>
 
-
+        {% for profile in profiles %}
         <div class="article">
             <!-- 사진 -->
             <span id="profile">
                 <i class="fas fa-duotone fa-user"></i>
             </span>
             <span class="name0">
-                김도연
+                  {{ profile.user.username }}
             </span>
             <span class="name1">
-                Lv.마스터
+               LV.{{ profile.level }}
             </span>
+
             <span class="name3">
-                <button class="btn">프로필 보기</button>
+                <a href="{% url 'board:volunteer_profile' pk=profile.pk %}">
+                  <button class="btn">프로필 보기</button></a>
             </span>
         </div>
+        {% endfor %}
 
         <footer></footer>
     </div>

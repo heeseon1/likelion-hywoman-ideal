@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserChangeForm
 from .models import User
 
 class CustomUserAdmin(UserAdmin):
-    list_display = ['username', 'id', 'category', 'is_active']
+    list_display = ['username', 'id', 'category', 'is_active','warning']
 
 admin.site.register(User, CustomUserAdmin)
+

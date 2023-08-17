@@ -1,0 +1,567 @@
+#layout {
+    width: 960px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  html, body {
+    width: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  footer {
+    height: 300px;
+  }
+
+  /* .setting{
+    font-size: 25px;
+  } */
+  .setting-list{
+    margin-top: 90px;
+  }
+
+  #icon1, #icon2, #icon3{
+    float: right;
+  }
+
+
+
+    .eye-coin-charge{
+        margin-bottom: 50px;
+    }
+    .eye-coin-info{
+        margin-bottom: 50px;
+    }
+
+    .btns > span{
+        font-size: 15px;
+    }
+
+    .btns{
+        width: 390px;
+
+        padding: 10px 10px 10px 10px;
+        border: none;
+        border-radius: 30px;
+        background: #ffffff;
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 2px 0 #c4c4c4, 2px 4px 6px #888888;
+        -webkit-transition: all .15s linear;
+        transition: all .15s linear;
+    }
+
+    .version{
+        font-size: 20px;
+        color: white;
+        margin: 30px 0;
+    }
+
+    .logout button{
+        width: 90px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .out button{
+        width: 90px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .logout button:hover{
+        background-color: rgb(218, 218, 218);
+    }
+
+    .out button:hover{
+        background-color: rgb(218, 218, 218);
+    }
+
+
+
+    .back{
+        background-color: rgb(140, 140, 140);
+        width: 400px;
+        margin-left: 38%;
+        padding: 40px;
+        height: 600px;
+        border-radius: 30px;
+        margin-top: 50px;
+    }
+
+    .btns:hover {
+        background: rgb(218, 218, 218);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+    }
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+body{
+  /* background: #f2f3fb; */
+  background: #7f7f7f;
+}
+::selection{
+  color: #fff;
+  background: #7f7f7f;
+}
+.popup{
+  position: absolute;
+  left: 50%;
+}
+
+
+btn1 button, btn2 button{
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: background 0.1s linear, border-color 0.1s linear, color 0.1s linear;
+}
+
+
+.popup{
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  top: -150%;
+  max-width: 380px;
+  width: 200px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: top 0s 0.2s ease-in-out,
+              opacity 0.2s 0s ease-in-out,
+              transform 0.2s 0s ease-in-out;
+              z-index: 1;
+}
+.popup.show{
+  top: 50%;
+  opacity: 1;
+  pointer-events: auto;
+  transform:translate(-50%, -50%) scale(1);
+  transition: top 0s 0s ease-in-out,
+              opacity 0.2s 0s ease-in-out,
+              transform 0.2s 0s ease-in-out;
+
+}
+
+.popup .content{
+  margin: 20px 0;
+}
+.popup .icons{
+  margin: 15px 0 20px 0;
+}
+.content p{
+  font-size: 16px;
+}
+.content .icons a{
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.field input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+
+
+.btn1 {
+  padding: 5px 18px;
+  border: 0;
+  border-radius: 100px;
+  background-color: #80c6ff;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  margin-left: 12%;
+}
+
+.btn1:hover {
+  background-color: #6fc5ff;
+  box-shadow: 0 0 20px #6fc5ff50;
+  transform: scale(1.1);
+}
+
+.btn1:active {
+  background-color: #3d94cf;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+
+.btn2 {
+  padding: 5px 18px;
+  border: 0;
+  border-radius: 100px;
+  background-color: #f8baba;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  margin-left: 8%;
+}
+
+.btn2:hover {
+  background-color: #f8baba;
+  box-shadow: 0 0 20px #ffd8d8;
+  transform: scale(1.1);
+}
+
+.btn2:active {
+  background-color: #d89393;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.btn3{
+  color: #090909;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  transition: all .3s;
+  box-shadow: 6px 6px 12px #c5c5c5,
+              -6px -6px 12px #ffffff;
+ }
+
+ .btn3:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5,
+              inset -4px -4px 12px #ffffff;
+ }
+
+ .datepick {
+  margin-top: 7%;
+
+ }
+
+.str3 {
+  font-size: 18px;
+}
+
+.str4 {
+  font-size: 18px;
+  text-align: center;
+}
+
+
+/* 토글 */
+nav {
+    width: 100%;
+  }
+
+  ul {
+    width: 60%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  /*  리스트 간 간격 좀 더 늘렸습니다 */
+  ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 30px;
+  }
+
+  /*
+    수정 필요
+    ul li:hover{
+    background-color: rgb(127, 127, 127);
+    border-radius: 10px;
+  } */
+
+  ul li a {
+  /* 색상은 각자 페이지에 맞게 자유로이 */
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .toggle {
+    width: 100%;
+    padding: 20px 30px;
+    text-align: right;
+    box-sizing: border-box;
+    color: white;
+    font-size: 32px;
+    display: none;
+  }
+
+  /*  웹 로고 + 서비스 명 스타일 추가*/
+  .web-name{
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  nav span:first-child {
+    margin-left: 5%;
+  }
+
+  nav span{
+    float: left;
+  }
+
+
+  nav span img{
+    width: 100px;
+    padding: 10px;
+  }
+
+
+
+   /* 리스트 글이 길어져서 963px부터 블록으로 떨어지더라구 지저분한 거 같아서 964px로 변경했습니다!  */
+  @media (min-width:220px) and (max-width:990px) {
+    .toggle{
+        display: block;
+    }
+    ul{
+        width: 100%;
+        display: none;
+    }
+    ul li{
+        display: block;
+        text-align: center;
+    }
+    .active{
+        display: block;
+    }
+  }
+
+  @media screen and (max-width:1020px) {
+    #layout {
+        width: 960px;
+        padding: 0 20px;
+        margin: 0 auto;
+      }
+
+      html, body {
+        width: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      footer {
+        height: 200px;
+      }
+
+      /* .setting{
+        font-size: 25px;
+      } */
+      .setting-list{
+        margin-top: 90px;
+      }
+
+      #icon1, #icon2, #icon3{
+        float: right;
+      }
+
+
+
+        .eye-coin-charge{
+            margin-bottom: 50px;
+        }
+        .eye-coin-info{
+            margin-bottom: 50px;
+        }
+
+        .btns > span{
+            font-size: 15px;
+        }
+
+        .btns{
+            width: 390px;
+
+            padding: 10px 10px 10px 10px;
+            border: none;
+            border-radius: 30px;
+            background: #ffffff;
+            border: 1px solid #e6e6e6;
+            box-shadow: 0 2px 0 #c4c4c4, 2px 4px 6px #888888;
+            -webkit-transition: all .15s linear;
+            transition: all .15s linear;
+        }
+
+        .version{
+            font-size: 20px;
+            color: white;
+            margin: 30px 0;
+        }
+
+        .logout button{
+            width: 90px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .out button{
+            width: 90px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .logout button:hover{
+            background-color: rgb(218, 218, 218);
+        }
+
+        .out button:hover{
+            background-color: rgb(218, 218, 218);
+        }
+
+
+
+        .back{
+            background-color: rgb(140, 140, 140);
+            width: 400px;
+            margin-left: 25%;
+            padding: 40px;
+            height: 600px;
+            border-radius: 30px;
+            margin-top: 50px;
+        }
+
+        .btns:hover {
+            background: rgb(218, 218, 218);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+
+  }
+
+  @media screen and (max-width:478px){
+    #layout {
+        width: 960px;
+        padding: 0 20px;
+        margin: 0 auto;
+      }
+
+      html, body {
+        width: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      footer {
+        height: 200px;
+      }
+
+      /* .setting{
+        font-size: 25px;
+      } */
+      .setting-list{
+        margin-top: 40px;
+      }
+
+      #icon1, #icon2, #icon3{
+        float: right;
+      }
+
+
+
+        .eye-coin-charge{
+            margin-bottom: 50px;
+        }
+        .eye-coin-info{
+            margin-bottom: 50px;
+        }
+
+        .btns > span{
+            font-size: 15px;
+        }
+
+        .btns{
+            width: 255px;
+
+            padding: 10px 10px 10px 10px;
+            border: none;
+            border-radius: 30px;
+            background: #ffffff;
+            border: 1px solid #e6e6e6;
+            box-shadow: 0 2px 0 #c4c4c4, 2px 4px 6px #888888;
+            -webkit-transition: all .15s linear;
+            transition: all .15s linear;
+        }
+
+        .version{
+            font-size: 20px;
+            color: white;
+            margin: 30px 0;
+        }
+
+        .logout button{
+            width: 90px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .out button{
+            width: 90px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .logout button:hover{
+            background-color: rgb(218, 218, 218);
+        }
+
+        .out button:hover{
+            background-color: rgb(218, 218, 218);
+        }
+
+
+
+        .back{
+            background-color: rgb(140, 140, 140);
+            width: 260px;
+            margin-left: 13%;
+            padding: 40px;
+            height: 500px;
+            border-radius: 30px;
+            margin-top: 50px;
+        }
+
+        .btns:hover {
+            background: rgb(218, 218, 218);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+  }

@@ -1,32 +1,445 @@
+<!--봉사자 달력에서 날짜 눌러서 신청하기 화면(장애인 시각)-->
+
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ volunteer.user.username }} 프로필</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYE CONTACT</title>
+    <link rel="stylesheet" href="{% static 'css/volunteer_profile.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+  <style>
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .out-top {
+        animation: rotate 20s linear infinite;
+        transform-origin: 13px 25px;
+    }
+
+    .in-top {
+        animation: rotate 10s linear infinite;
+        transform-origin: 13px 25px;
+    }
+
+    .out-bottom {
+        animation: rotate 25s linear infinite;
+        transform-origin: 84px 93px;
+    }
+
+    .in-bottom {
+        animation: rotate 15s linear infinite;
+        transform-origin: 84px 93px;
+    }
+</style>
 </head>
-<body>
-  <h1>{{ volunteer.user.username }} 프로필</h1>
+<body style="background-color: #d1b6cea9;">
 
-  <h2>평가 및 리뷰</h2>
-  <ul>
-    {% for review in reviews %}
-      <li>{{ review.content }} (평점: {{ review.rating }})</li>
-    {% empty %}
-      <li>아직 리뷰가 없습니다.</li>
-    {% endfor %}
-  </ul>
+<svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+   <defs>
 
-  <h2>가능한 날짜와 시간대</h2>
+  </defs>
+  <path fill="#D8D8D8" class="out-top"
+      d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
+  <path fill="#A4A4A4" class="in-top"
+      d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+  <path fill="#F2F2F2" class="out-bottom"
+      d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
+  <path fill="#E6E6E6" class="in-bottom"
+      d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+</svg>
+
+<nav class="nav-1">
+  <span class="logoImage"><a href="#"><img src="{% static 'img/logo-notStr.png' %}" alt="logoImage"></a></span>
+  <span class="web-name">EYE CONTACT</span>
+</nav>
+<div class="toggle">
+  <i class="fa fa-bars menu" aria-hidden="true"></i>
+</div>
+<span class="toggle-list">
   <ul>
-    {% for available_date in available_dates %}
-      <li>{{ available_date.date }} (시간대:
-        {% for time_slot in available_date.time_slots.all %}
-          {{ time_slot.start_time|time:"H:i" }} - {{ time_slot.end_time|time:"H:i" }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-      )</li>
-    {% empty %}
-      <li>가능한 날짜와 시간대가 없습니다.</li>
-    {% endfor %}
+            <li><a href="{% url 'web:main1' %}">홈</a></li>
+            <li><a href="{% url 'board:matching' %}">매칭</a></li>
+            <li><a href="{% url 'board:community' %}">커뮤니티</a></li>
+            <li><a href="#">마이페이지</a></li>
+            <li><a href="{% url 'account_logout' %}">로그아웃</a></li>
   </ul>
+</span>
+
+<div class="layout">
+    <div class="phone">
+        <div class="menu">
+            <div class="time">4:20</div>
+            <div class="icons">
+                <div class="network"></div>
+                <div class="battery"></div>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="profile"><i class="fa-solid fa-user" style="font-size: 30px;"></i></div>
+            <div class="str1">
+                {{ profile.user.username }}
+            </div>
+            <div class="str2">
+                Lv.{{profile.level}}
+            </div>
+            <button class="view-modal">
+                신청하기
+            </button>
+
+            <div class="datepick">
+          <div class="str5"><a style="font-size: 25px; color: #343333;">매칭 날짜</a> 선택하기!</div>
+          <form style="text-align: center;  margin-left: 4%; z-index: 20;">
+            <div class='formInput dateSelector'><i class='fa fa-calendar-o'></i>
+            <input type='input' name='date' id='hbdsdf' value='date' />
+            </div>
+            </form>
+        </div>
+        <br>
+        <div class="rivew">
+          <div class="str5"><a style="font-size: 25px; color: #343333;"> {{ profile.user.username }}</a>님은 이런 사람이에요!</div>
+        </div>
+        </div>
+
+            <div class="popup">
+                <header>
+                  <span>매칭 신청하기</span>
+                  <div class="close"><i class="uil uil-times"></i></div>
+                </header>
+                <div class="content">
+                <p><a>'{{ profile.user.username }}'</a> 님께<a>8/20</a>일에<br>매칭을 신청하시겠습니까?</p>
+                  <div class="field">
+                    <button class="btn1">아니오</button>
+                    <button class="btn2">네</button>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+    </div>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script src="index.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+        </div>
+    </div>
+</div>
+
+<script>
+    var monthNames = {
+            0: "January",
+            1: "February",
+            2: "March",
+            3: "April",
+            4: "May",
+            5: "June",
+            6: "July",
+            7: "August",
+            8: "September",
+            9: "October",
+            10: "November",
+            11: "December"
+        }
+
+        function Cal() {
+            this.date = {};
+            this.markup = {};
+            this.date.today = new Date();
+            this.date.today = new Date(this.date.today.getUTCFullYear(),this.date.today.getUTCMonth(),this.date.today.getUTCDate());
+            this.date.browse = new Date();
+            this.markup.row = "row";
+            this.markup.cell = "cell";
+            this.markup.inactive = "g";
+            this.markup.currentMonth = "mn";
+            this.markup.slctd = "slctd";
+            this.markup.today = "today";
+            this.markup.dayArea = "dayArea";
+            this.elementTag = 'calendar';
+            this.targetInput = '#hbdsdf';
+            this.init = false;
+            this.buildDOM();
+            this.selectDate(this.date.today.getFullYear(),this.date.today.getMonth(),this.date.today.getDate())
+            this.constructDayArea();
+            this.updateInput('Birth date','','');
+
+
+            t = this;
+            $(document).ready(function(){
+                $(document).click(function(ms){
+                    e = $('.'+t.elementTag+' .view');
+                    eco = e.offset();
+                    if(ms.pageX<eco.left || ms.pageX>eco.left+e.width() || ms.pageY<eco.top || ms.pageY>eco.top+e.height()) {
+                        if(!t.init) t.hide(300);
+                    }
+                });
+                $('.'+t.elementTag).on('click','.next-month',function(){
+                    t.setMonthNext();
+                });
+                $('.'+t.elementTag).on('click','.prev-month',function(){
+                    t.setMonthPrev();
+                });
+                $('.'+t.elementTag).on('click','.next-year',function(){
+                    t.setYearNext();
+                });
+                $('.'+t.elementTag).on('click','.prev-year',function(){
+                    t.setYearPrev();
+                });
+
+                $('.'+t.elementTag).on('click','.jump-to-next-month',function(){
+                    t.setMonthNext();
+                });
+                $('.'+t.elementTag).on('click','.jump-to-previous-month',function(){
+                    t.setMonthPrev();
+                });
+
+                $('.'+t.elementTag).on('click','.'+t.markup.currentMonth,function(){
+                    d = t.selectDate(t.date.browse.getUTCFullYear(),t.date.browse.getUTCMonth(),$(this).html());
+                    t.hide(300);
+                });
+
+                $('.'+t.elementTag).on('click','.title',function(){
+                    t.date.browse = new Date(t.date.today.getTime());
+                    t.constructDayArea(false);
+                });
+
+                $(t.targetInput).focus(function(){
+                    t.show(100);
+                    $(this).blur();
+                });
+
+            });
+
+
+        }
+        Cal.prototype.wd = function(wd) {
+            if(wd==0) return 7
+            return wd
+        }
+        Cal.prototype.buildDOM = function() {
+            html = "<div class='clear "+this.elementTag+"'>\n<div class='view'>\n<div class='head'>\n<div class='title'><span class='m'></span> <span class='y'></span></div>\n</div>\n";
+            html += "<div class='row th'>\n<div class='C'>M</div>\n<div class='C'>T</div>\n<div class='C'>W</div>\n<div class='C'>T</div>\n<div class='C'>F</div>\n<div class='C'>S</div>\n<div class='C'>S</div>\n</div>\n<div class='"+this.markup.dayArea+"'>\n";
+            html += "</div>\n\n<div class='row nav'>\n\n<i class='btn prev prev-year fa fa-fast-backward'></i>\n<i class='btn prev prev-month fa fa-play fa-flip-horizontal'></i>\n<i class='btn next next-month fa fa-play'></i>\n<i class='btn next next-year fa fa-fast-forward'></i>\n</div>\n</div>\n</div>\n";
+            $(html).insertAfter(this.targetInput);
+            $(this.targetInput).css('cursor','pointer');
+            this.hide(0);
+        }
+        Cal.prototype.constructDayArea = function(flipDirection) {
+            newViewContent = "";
+            wd = this.wd(this.date.browse.getUTCDay());
+            d = this.date.browse.getUTCDate();
+            m = this.date.browse.getUTCMonth();
+            y = this.date.browse.getUTCFullYear();
+
+            monthBgnDate = new Date(y,m,1);
+            monthBgn = monthBgnDate.getTime();
+            monthEndDate = new Date(this.getMonthNext().getTime()-1000*60*60*24);
+            monthEnd = monthEndDate.getTime();
+
+            monthBgnWd = this.wd(monthBgnDate.getUTCDay());
+            itrBgn = monthBgnDate.getTime()-(monthBgnWd-1)*1000*60*60*24;
+            /*itrEnd = monthEnd;
+            i = 0;
+            while(this.wd(new Date(itrEnd).getUTCDay())!=7) {
+                itrEnd += 1000*60*60*24;
+                i = i+1;
+                if(i>10) break;
+            }*/
+
+
+
+            i = 1;
+            n = 0;
+            dayItr = itrBgn;
+            newViewContent += "<div class='"+this.markup.row+"'>\n";
+            while(n<42) {
+                cls = new Array("C",this.markup.cell);
+                if(dayItr<=monthBgn) cls.push(this.markup.inactive,"jump-to-previous-month");
+                else if(dayItr>=monthEnd+1000*60*60*36) cls.push(this.markup.inactive,"jump-to-next-month");
+                else cls.push(this.markup.currentMonth);
+                if(dayItr==this.date.slctd.getTime()+1000*60*60*24) cls.push(this.markup.slctd);
+                if(dayItr==this.date.today.getTime()+1000*60*60*24) cls.push(this.markup.today);
+
+                date = new Date(dayItr);
+                newViewContent += "<div class='"+cls.join(" ")+"'>"+date.getUTCDate()+"</div>\n";
+                i += 1;
+                if(i>7) {
+                    i = 1;
+                    newViewContent += "</div>\n<div class='"+this.markup.row+"'>\n";
+                }
+                n += 1;
+                dayItr = dayItr+1000*60*60*24;
+            }
+            newViewContent += "</div>\n";
+
+
+            this.changePage(newViewContent,flipDirection);
+            $('.'+this.elementTag+' .title .m').html(monthNames[m]);
+            $('.'+this.elementTag+' .title .y').html(y);
+            return newViewContent;
+        }
+        Cal.prototype.changePage = function(newPageContent,flipDirection) {
+
+            multiplier = -1;
+            mark = "-";
+            if(flipDirection) {
+                multiplier = 1;
+                mark = "+";
+            }
+
+            oldPage = $('.'+this.elementTag+' .'+this.markup.dayArea+' .mArea');
+            newPage = $("<div class='mArea'></div>").css('left',(-1*multiplier*224)+'px').html(newPageContent);
+            $('.'+this.elementTag+' .'+this.markup.dayArea).append(newPage);
+
+            $('.mArea').stop(1,1).animate({
+                left: mark+"=224px"
+            },300,function(){
+                oldPage.remove();
+            });
+        }
+        Cal.prototype.selectDate = function(y,m,d) {
+            this.date.slctd = new Date(y,m,d);
+            this.updateInput(y,m,d);
+            this.constructDayArea(false);
+            return this.date.slctd;
+        }
+        Cal.prototype.updateInput = function(y,m,d) {
+            if(m=='') m = '';
+            else m = monthNames[m];
+            $(this.targetInput).val(y+" "+m+" "+d);
+        }
+        Cal.prototype.getMonthNext = function() {
+            m = this.date.browse.getUTCMonth();
+            y = this.date.browse.getUTCFullYear();
+            if(m+1>11) return new Date(y+1,0);
+            else return new Date(y,m+1);
+        }
+        Cal.prototype.getMonthPrev = function() {
+            m = this.date.browse.getUTCMonth();
+            y = this.date.browse.getUTCFullYear();
+            if(m-1<0) return new Date(y-1,11);
+            else return new Date(y,m-1);
+        }
+        Cal.prototype.setMonthNext = function() {
+            m = this.date.browse.getUTCMonth();
+            y = this.date.browse.getUTCFullYear();
+            if(m+1>11) {
+                this.date.browse.setUTCFullYear(y+1);
+                this.date.browse.setUTCMonth(0);
+            } else {
+                this.date.browse.setUTCMonth(m+1);
+            }
+            this.constructDayArea(false);
+        }
+        Cal.prototype.setMonthPrev = function() {
+            m = this.date.browse.getUTCMonth();
+            y = this.date.browse.getUTCFullYear();
+            if(m-1<0) {
+                this.date.browse.setUTCFullYear(y-1);
+                this.date.browse.setUTCMonth(11);
+            } else {
+                this.date.browse.setUTCMonth(m-1);
+            }
+            this.constructDayArea(true);
+        }
+        Cal.prototype.setYearNext = function() {
+            y = this.date.browse.getUTCFullYear();
+            this.date.browse.setUTCFullYear(y+1);
+            this.constructDayArea(false);
+        }
+        Cal.prototype.setYearPrev = function() {
+            y = this.date.browse.getUTCFullYear();
+            this.date.browse.setUTCFullYear(y-1);
+            this.constructDayArea(true);
+        }
+        Cal.prototype.hide = function(duration) {
+            $('.'+this.elementTag+' .view').slideUp(duration);
+        }
+        Cal.prototype.show = function(duration) {
+            t = this;
+            t.init = true;
+            $('.'+this.elementTag+' .view').slideDown(duration,function(){
+                t.init = false;
+            });
+        }
+
+        var c = new Cal();
+</script>
+<!-- 이하 스크립트 및 라이브러리 스크립트 링크 -->
+<script src="https://kit.fontawesome.com/c4fe13f55a.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.menu').click(function(){
+            $('ul').toggleClass('active');
+        })
+    })
+</script>
+<script>
+    const viewBtn = document.querySelector(".view-modal"),
+    popup = document.querySelector(".popup"),
+    close = popup.querySelector(".close"),
+    field = popup.querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
+
+    viewBtn.onclick = ()=>{
+      popup.classList.toggle("show");
+    }
+    close.onclick = ()=>{
+      viewBtn.click();
+    }
+
+    copy.onclick = ()=>{
+      input.select(); //select input value
+      if(document.execCommand("copy")){ //if the selected text copy
+        field.classList.add("active");
+        copy.innerText = "Copied";
+        setTimeout(()=>{
+          window.getSelection().removeAllRanges(); //remove selection from document
+          field.classList.remove("active");
+          copy.innerText = "Copy";
+        }, 3000);
+      }
+    }
+</script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/js/bootstrap-material-design.js" integrity="sha384-3xciOSDAlaXneEmyOo0ME/2grfpqzhhTcM4cE32Ce9+8DW/04AGoTACzQpphYGYe" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('body').bootstrapMaterialDesign();
+    });
+</script>
 </body>
 </html>

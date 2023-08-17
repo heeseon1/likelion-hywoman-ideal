@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, UpdateView, DeleteView
@@ -155,12 +156,15 @@ class CommentUpdate(View):
         return render(request, 'board/comment_update.html', {'form': form, 'comment': comment})
 
 class CommentDelete(View):
+    def get(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        return render(request, 'board/confirm_comment_delete.html', {'comment': comment})
+
     def post(self, request, pk):
-        if request.user.is_authenticated:
-            comment = get_object_or_404(Comment, pk=pk)
-            comment.delete()
-            return redirect('board:post_detail', pk=comment.post.id)
-        return redirect('board:post_detail', pk=pk)
+        comment = get_object_or_404(Comment, pk=pk)
+        post_pk = comment.post.pk
+        comment.delete()
+        return redirect('board:post_detail', pk=post_pk)
 
 
 ##매칭 화면
@@ -171,25 +175,37 @@ def matching_view2(request):
     return render(request, 'board/matching2.html')
 
 #봉사자 프로필 등록
-def register_volunteer_profile(request):
-    if request.method == 'POST':
+class RegisterVolunteerProfileView(View):
+    def get(self, request):
+        form = VolunteerProfileForm()
+        context = {
+            "user": request.user,
+            "form": form
+        }
+        return render(request, 'board/register_volunteer.html', context)
+
+    def post(self,request):
         form = VolunteerProfileForm(request.POST)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('volunteer_list')
-    else:
-        form = VolunteerProfileForm()
+            volunteerProfile = form.save(commit=False)
+            volunteerProfile.user = request.user
+            volunteerProfile.save()
+            return redirect("board:volunteer_list")
+        else:
+            print(form.errors)
 
-    context = {'form': form}
-    return render(request, 'board/register_volunteer.html', context)
+        context = {
+            "user": request.user,
+            'form':form
+        }
+        return render(request, "board/register_volunteer.html", context)
 
 # 봉사자 프로필 보기
-def volunteer_profile(request, username):
-    user = get_object_or_404(User, username=username)
-    profile = get_object_or_404(VolunteerProfile, user=user)
-    return render(request, 'board/volunteer_profile.html', {'profile': profile})
+class VolunteerProfileView(View):
+    def get(self, request, pk):
+        profile = get_object_or_404(VolunteerProfile, pk=pk)
+        user = profile.user
+        return render(request, 'board/volunteer_profile.html', {'profile': profile, 'user': user})
 
 #봉사자 목록 보기
 def volunteer_list(request):
@@ -207,6 +223,23 @@ class VolunteerReviews(View):
             'reviews': reviews,
         }
         return render(request, 'board/volunteer_reviews.html', context)
+
+#신고기능
+def given_warning(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    reported_user = post.author
+
+    if request.method == 'POST':
+        reported_user.warning += 1
+        reported_user.save()
+
+        if reported_user.warning >= 5:
+            reported_user.is_active = False
+            reported_user.save()
+
+        return redirect('board:community')
+
+    return render(request, 'board/post_detail.html')
 
 
 #메시지#

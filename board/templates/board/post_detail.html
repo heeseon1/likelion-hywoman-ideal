@@ -1,9 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
-
-{% block content %}
-
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +10,11 @@
     <link href="{% static 'css/posted.css' %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d9483ff595.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         @keyframes rotate {
             0% {
@@ -46,7 +48,7 @@
     </style>
 </head>
 
-
+{% block content %}
 <body style="background-color:  rgb(244, 247, 208);">
     <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
 
@@ -60,41 +62,31 @@
             d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
     </svg>
 
-<nav class="nav-1">
-        <span class="logoImage"><a href="#"><img src="{% static 'img/logo-notStr.png' %}" alt="logoImage"></a></span>
+    <nav>
+        <span class=""><a href="#"><img src="{% static 'img/logo-notStr.png' %}" alt="logoImage"></a></span>
         <span class="web-name">EYE CONTACT</span>
-    </nav>
-    <div class="toggle">
-        <i class="fa fa-bars menu" aria-hidden="true"></i>
-    </div>
-    <span class="toggle-list">
+        <div class="toggle">
+            <!--주의 폰트어썸 링크 head에 추가 필요  -->
+            <i class="fa fa-bars menu" aria-hidden="true"></i>
+        </div>
         <ul>
-            <li><a href="#">홈</a></li>
-            <li><a href="{% url 'board:matching' %}">매칭</a></li>
-            <!-- 커뮤 링크는 #로 해두셔도 됩니더 -->
+            <li><a href="{% url 'web:main1' %}">홈</a></li>
+            <li><a href="#">매칭</a></li>
             <li><a href="{% url 'board:community' %}">커뮤니티</a></li>
             <li><a href="#">마이페이지</a></li>
         </ul>
-    </span>
+    </nav>
 
-
-<script type="text/javascript">
-  $(document).ready(function(){
-      $('.menu').click(function(){
-          $('ul').toggleClass('active');
-      })
-  })
-</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.menu').click(function () {
+                $('ul').toggleClass('active');
+            })
+        })
+    </script>
     <div class="layout">
         <div class="container">
-            <!-- <div class="titleText">
-                <span id="str1">묻고<br>답해요</span>
-                <span id="soundIcon"><i class="fa-solid fa-volume-high" id="playButton"
-                        alt="음성 재생 버튼" style="cursor: pointer;"></i></span>
-                <audio id="audioPlayer">
-                    <source src="#" type="audio/mpeg">
-                </audio>
-            </div> -->
+
         </div>
         <div class="phone">
 
@@ -108,69 +100,130 @@
 
             </div>
 
-            <!-- 추가 부분 시작 (삭제, 수정, 신고 버튼)-->
             <div class="phone-header">
                 <span class="user">{{ post_author }}</span>
-                {% if user.is_authenticated and user.username == post_author %}
                 <span class="rewrite" title="수정하기">
                     <a href="{% url 'board:post_update' pk=post_id %}">
                         <i class="fa-solid fa-pen"></i>
                     </a>
                 </span>
+
                 <span class="remove-post" title="삭제하기">
                     <a href="{% url 'board:post_delete' pk=post_id %}">
                     <i class="fa-solid fa-trash"></i>
                     </a>
                 </span>
-                {% endif %}
-                <span class="report" title="신고하기">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <span class="report-2" title="신고하기">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
                 </span>
 
-               <!-- 음성 지원하려고 해본 겁니다 무시해 주세용... -->
-                <!-- <audio class="audio-player">
-                    <source src="/mp3/신고하기.mp3" type="audio/mpeg">
-                    지원되지 않는 브라우저입니다
-                </audio> -->
+
+                <!-- 0817 수정 -1 -->
+                <div>
+                    <audio class="audio-player">
+                        <source src="/mp3/신고하기.mp3" type="audio/mpeg">
+                        지원되지 않는 브라우저입니다
+                    </audio>
+                    <audio class="audio-player3">
+                        <source src="/mp3/삭제하기.mp3" type="audio/mpeg">
+                        지원되지 않는 브라우저입니다
+                    </audio>
+                    <audio class="audio-player4">
+                        <source src="/mp3/수정하기.mp3" type="audio/mpeg">
+                        지원되지 않는 브라우저입니다
+                    </audio>
+                </div>
+
 
             </div>
-<!-- 추가 부분 끝 -->
 
+            <script>
+                const hoverTrigger = document.querySelector('.fa-triangle-exclamation');
+                const audioPlayer = document.querySelector('.audio-player');
+
+                hoverTrigger.addEventListener('mouseover', () => {
+                    audioPlayer.play();
+                });
+
+                const hoverTrigger3 = document.querySelector('.fa-solid.fa-trash');
+                const audioPlayer3 = document.querySelector('.audio-player3');
+
+                hoverTrigger3.addEventListener('mouseover', () => {
+                    audioPlayer3.play();
+                });
+
+
+                const hoverTrigger4 = document.querySelector('.fa-pen');
+                const audioPlayer4 = document.querySelector('.audio-player4');
+
+                hoverTrigger4.addEventListener('mouseover', () => {
+                    audioPlayer4.play();
+                });
+
+            </script>
+          <!-- 0817 수정 -1 끝 -->
 
             <div class="scroll-container-1">
-                    <span class="content">
-                        <p>{{ post_contents }}
-                            <!-- css 값을 초과하면 스크롤이 생깁니다 테스트를 위해 주절주절
+                <span class="content">
+                    <p>{{ post_contents }}
+                        <!-- css 값을 초과하면 스크롤이 생깁니다 테스트를 위해 주절주절
                             길게 적어보고 있어요 해커톤 파이팅 아이디얼 파이팅
                             우리 팀 파이팅 행복하세요 잘 되는 거 같네요
                             확인하시려면 이 주석을 풀면 됩니다-->
-                        </p>
+                    </p>
+
+                </span>
+
+
+            </div>
+            <div class="line-1"></div>
+            <!-- 댓글 시작 -->
+            <div class="comment">
+                {% for comment in comments %}
+                <!-- 댓글 추가 시 여기서부터 -->
+                <div class="comment-header">
+                    <span class="user-name">{{ comment.author }}</span>
+                    {% if comment.author == request.user %}
+                    <span class="rewrite-2" title="수정하기">
+                        <a href="{% url 'board:cm-update' pk=comment.pk  %}">
+                        <i class="fa-solid fa-pen"></i>
+                        </a>
                     </span>
+
+                    <span class="remove-post-2" title="삭제하기">
+                        <a href="{% url 'board:cm-delete' pk=comment.pk  %}">
+                        <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </span>
+                    {% endif %}
+
+                    <span class="report-2" title="신고하기">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </span>
+                </div>
+
+                <div class="comment-body">
+                    <!--왜 저는.. comment_content로 하면 댓글이 안 뜰까요..?ㅎㅎ-->
+                    <div class="user-comment">{{ comment.content }}</div>
+                    <div class="line-2"></div>
+                </div>
+                {% endfor %}
+
+
+
+                <!-- 여기까지를 반복하면 됩니다
+                .comment 안에서 움직이면 됩니당 -->
+
+
             </div>
 
 
-            <div class="line-1"></div>
-            <!-- 댓글 시작 -->
-
-                <div class="comment">
-                    {% for comment in comments %}
-                    <!-- 댓글 추가 시 여기서부터 -->
-                    <div class="user-name">{{ comment.author}}</div>
-                    <div class="user-comment">{{ comment.content}}</div>
-                    <div class="line-2"></div>
-                    <!-- 여기까지를 반복하면 됩니다
-                    .comment 안에서 움직이면 됩니당 -->
-                    {% endfor %}
-                </div>
-
-                <!-- 댓글 끝 -->
-
+            <!-- 댓글 끝 -->
             <form action="{% url 'board:cm-write' pk=post_id %}" method="post">
-                {% csrf_token %}
-                {{ comment_form.label_tag }}
                 <span><textarea name="{{ comment_form.content.name }}" id="input-comment" placeholder="댓글을 작성해 주세요"></textarea></span>
-                <!--요게 댓글 등록 버튼-->
                 <span><input id="send" type="submit" value="작성"></span>
+
             </form>
 
 
@@ -178,10 +231,61 @@
 
         </div>
 
+        <div class="popup">
+            <div class="content">
+                <p>&nbsp;신고하시겠습니까?</p>
+                <div class="field">
+                    <form action="{% url 'board:given_warning' pk=post_id %}" method="POST">
+                    <button class="btn1">아니오</button>
+                        {% csrf_token %}
+                        <button class="btn2" type="submit">네</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 0817 수정 -2-->
+        <script>
+            const viewBtn1 = document.querySelector(".report-2"),
+                  viewBtn2 = document.querySelector(".report"),
+                  popup = document.querySelector(".popup"),
+                  close = popup.querySelector(".btn1"),
+                  field = popup.querySelector(".field"),
+                  input = field.querySelector("input"),
+                  copy = field.querySelector(".btn2");
+
+            viewBtn1.onclick = () => {
+                popup.classList.toggle("show");
+            }
+            viewBtn2.onclick = () => {
+                popup.classList.toggle("show");
+            }
+            close.onclick = () => {
+                popup.classList.remove("show");
+            }
+
+            copy.onclick = () => {
+                input.select();
+                if (document.execCommand("copy")) {
+                    field.classList.add("active");
+                    copy.innerText = "Copied";
+                    setTimeout(() => {
+                        window.getSelection().removeAllRanges();
+                        field.classList.remove("active");
+                        copy.innerText = "네";
+                    }, 3000);
+                }
+            }
+        </script>
+        <!-- 0817 수정 -2 끝 -->
+
+
+
         <footer></footer>
 
     </div>
-{% endblock %}
 </body>
-
+{% endblock %}
 </html>

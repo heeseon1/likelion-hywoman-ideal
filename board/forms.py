@@ -41,7 +41,7 @@ TimeSlotFormset = forms.inlineformset_factory(
 class VolunteerProfileForm(forms.ModelForm):
     class Meta:
         model = VolunteerProfile
-        fields = ['name', 'available_dates','user']
+        fields = ['name', 'content', 'level']
 
 class AvailableDateForm(forms.ModelForm):
     class Meta:

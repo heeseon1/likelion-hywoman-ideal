@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ profile.user.username }} 프로필</title>
+</head>
+<body>
+  <h1>{{ profile.user.username }} 프로필</h1>
+
+  <h2>평가 및 리뷰</h2>
+  <ul>
+    {% for review in reviews %}
+      <li>{{ review.content }} (평점: {{ review.rating }})</li>
+    {% empty %}
+      <li>아직 리뷰가 없습니다.</li>
+    {% endfor %}
+  </ul>
+
+  <h2>가능한 날짜와 시간대</h2>
+  <ul>
+    {% for available_date in available_dates %}
+      <li>{{ available_date.date }} (시간대:
+        {% for time_slot in available_date.time_slots.all %}
+          {{ time_slot.start_time|time:"H:i" }} - {{ time_slot.end_time|time:"H:i" }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      )</li>
+    {% empty %}
+      <li>가능한 날짜와 시간대가 없습니다.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

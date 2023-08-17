@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import *
 
 from .models import User
 
@@ -33,3 +34,15 @@ def button01_true(request):
     user.category = True
     user.save()
     return render(request, 'web/button01.html')
+
+# 마이 페이지 > 설정
+def setting_page(request):
+    return render(request, 'web/setting.html')
+
+# 유저 탈퇴 기능
+def delete_user(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('web:login')
+    return render(request, 'web/setting.html')

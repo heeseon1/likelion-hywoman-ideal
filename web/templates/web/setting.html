@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설정</title>
+    <script src="https://kit.fontawesome.com/d9483ff595.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    {% load static %}
+    <link href="{% static 'css/setting.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body style="background-color: #d3d2d2;">
+    <nav>
+        <span class=""><a href="#"><img src="{% static 'img/logo-notStr.png' %}" alt="logoImage"></a></span>
+        <span class="web-name">EYE CONTACT</span>
+        <div class="toggle">
+            <!--주의 폰트어썸 링크 & 제이쿼 head에 추가 필요  -->
+
+            <i class="fa fa-bars menu" aria-hidden="true"></i>
+        </div>
+        <ul>
+            <li><a href="{% url 'web:main1' %}">홈</a></li>
+            <li><a href="#">매칭</a></li>
+            <li><a href="{% url 'board:community' %}">커뮤니티</a></li>
+            <li><a href="#">마이페이지</a></li>
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.menu').click(function () {
+                $('ul').toggleClass('active');
+            })
+        })
+    </script>
+    <div class="layout">
+        <!-- <div class="setting">
+            설정
+        </div> -->
+        <div class="back">
+            <div class="setting-list">
+                <div class="eye-coin-charge">
+                    <button class="btns">
+                        <span>아이코인 충전</span>
+                        <span><i class="fa-solid fa-chevron-right" id="icon1"></i></span>
+                    </button>
+                </div>
+                <div class="eye-coin-info">
+                    <button class="btns">
+                        <span>아이코인 이용 내역</span>
+                        <span><i class="fa-solid fa-chevron-right" id="icon2"></i></span>
+                    </button>
+            </div>
+
+            <div class="line-1"></div>
+            <div class="version">
+                버전
+                <!-- 아래 <span></span>버전 정보 적는 곳 -->
+                <span> 0.0.1 </span>
+            </div>
+
+            <div class="line-2"></div>
+
+            <div class="btn-list">
+                <div class="logout">
+                    <button onclick="location.href='/accounts/logout/'">로그아웃</button>
+                </div>
+
+                <div class="out">
+                    <button>회원 탈퇴</button>
+                </div>
+            </div>
+
+        </div>
+        <!--탈퇴 모달-->
+        <div class="popup">
+            <div class="content">
+                <p>&nbsp;탈퇴 하시겠습니까?</p>
+                <div class="field">
+                    <button class="btn1" onclick="location.href='/mypage/setting/'">아니오</button>
+                    <form action="{% url 'web:delete_user' pk=user.pk %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn2" type="submit">네</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            // 로그아웃 모달
+            // 이었는데 탈퇴로...
+            // 두 개 하ㅕㄹ니까... 모르겠어요... 로그아웃
+            // 그냥,,, 로그아웃 하시길...
+            const viewBtn = document.querySelector(".out"),
+    popup = document.querySelector(".popup"),
+    close = popup.querySelector(".close"),
+    field = popup.querySelector(".field"),
+    input = field.querySelector("input"),
+    copy = field.querySelector("button");
+
+    viewBtn.onclick = ()=>{
+      popup.classList.toggle("show");
+    }
+    close.onclick = ()=>{
+      viewBtn.click();
+    }
+
+    copy.onclick = ()=>{
+      input.select(); //select input value
+      if(document.execCommand("copy")){ //if the selected text copy
+        field.classList.add("active");
+        copy.innerText = "Copied";
+        setTimeout(()=>{
+          window.getSelection().removeAllRanges(); //remove selection from document
+          field.classList.remove("active");
+          copy.innerText = "Copy";
+        }, 3000);
+      }
+    }
+
+            //탈퇴 모달
+            // const viewBtn2 = document.querySelector(".out"),
+            //     popup2 = document.querySelector(".popup2"),
+            //     close = popup.querySelector(".close"),
+            //     field2 = popup.querySelector(".field2"),
+            //     input2 = field.querySelector("input"),
+            //     copy2 = field.querySelector("button");
+
+            // viewBtn.onclick = () => {
+            //     popup2.classList.toggle("show");
+            // }
+            // close.onclick = () => {
+            //     viewBtn.click();
+            // }
+
+            // copy.onclick = () => {
+            //     input.select(); //select input value
+            //     if (document.execCommand("copy")) { //if the selected text copy
+            //         field.classList.add("active");
+            //         copy.innerText = "Copied";
+            //         setTimeout(() => {
+            //             window.getSelection().removeAllRanges(); //remove selection from document
+            //             field.classList.remove("active");
+            //             copy.innerText = "Copy";
+            //         }, 3000);
+            //     }
+            // }
+
+
+        </script>
+
+
+
+
+
+        <footer></footer>
+    </div>
+
+</body>
+
+</html>
